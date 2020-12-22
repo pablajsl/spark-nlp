@@ -18,6 +18,7 @@ case class Metrics(accuracy: Double, recall: Double, precision: Double, f1: Doub
 
 class SentenceDetectorDLModel(override val uid: String)
   extends AnnotatorModel[SentenceDetectorDLModel]
+    with SentenceDetectorDLParams
     with HasStorageRef
     with ParamsAndFeaturesWritable
     with WriteTensorflowModel {
@@ -40,13 +41,11 @@ class SentenceDetectorDLModel(override val uid: String)
   def setEncoder(encoder: SentenceDetectorDLEncoder): SentenceDetectorDLModel.this.type = set(this.encoder, encoder)
   def getEncoder: SentenceDetectorDLEncoder = $(this.encoder)
 
-
   /** Model architecture
    *
    * @group param
    **/
   var modelArchitecture = new Param[String](this, "modelArchitecture", "Model Architecture: one of (CNN)")
-
 
   /** Set architecture
    *
@@ -60,50 +59,10 @@ class SentenceDetectorDLModel(override val uid: String)
    **/
   def getModel: String = $(this.modelArchitecture)
 
-  /** Impossible penultimates
-   *
-   * @group param
-   **/
-  val impossiblePenultimates = new StringArrayParam(this, "impossiblePenultimates", "Impossible penultimates")
 
-  /** Set impossible penultimates
-   *
-   * @group setParam
-  **/
-  def setImpossiblePenultimates(impossiblePenultimates: Array[String]):
-    SentenceDetectorDLModel.this.type = set(this.impossiblePenultimates, impossiblePenultimates)
-
-  /** Get impossible penultimates
-   *
-   * @group getParam
-  **/
-  def getImpossiblePenultimates: Array[String] = $(this.impossiblePenultimates)
-
-  /** A flag indicating whether to split sentences into different Dataset rows. Useful for higher parallelism in
-    * fat rows. Defaults to false.
-    *
-    * @group getParam
-    **/
-  def explodeSentences = new BooleanParam(this, "explodeSentences", "Split sentences in separate rows")
-
-
-  /** Whether to split sentences into different Dataset rows. Useful for higher parallelism in fat rows. Defaults to false.
-    *
-    * @group setParam
-    **/
-  def setExplodeSentences(value: Boolean): SentenceDetectorDLModel.this.type = set(this.explodeSentences, value)
-
-
-  /** Whether to split sentences into different Dataset rows. Useful for higher parallelism in fat rows. Defaults to false.
-    *
-    * @group getParam
-    **/
-  def getExplodeSentences: Boolean = $(this.explodeSentences)
 
   setDefault(
-    modelArchitecture -> "cnn",
-    impossiblePenultimates -> Array(),
-    explodeSentences -> false
+    modelArchitecture -> "cnn"
   )
 
   private var _tfClassifier: Option[Broadcast[TensorflowSentenceDetectorDL]] = None
