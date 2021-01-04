@@ -49,6 +49,10 @@ assemblyOption in assembly := (assemblyOption in assembly).value.copy(
   includeScala = false
 )
 
+assemblyShadeRules in assembly := Seq(
+  ShadeRule.rename("com.amazonaws.**" -> "shadedAmazonAwsForSparkNlp.@1").inAll
+)
+
 credentials += Credentials(Path.userHome / ".ivy2" / ".sbtcredentials")
 
 ivyScala := ivyScala.value map {
@@ -122,20 +126,12 @@ lazy val testDependencies = Seq(
 lazy val utilDependencies = Seq(
   "com.typesafe" % "config" % "1.3.0",
   "org.rocksdb" % "rocksdbjni" % "6.5.3",
-  "org.apache.hadoop" % "hadoop-aws" %  "2.7.3"
-    exclude("com.fasterxml.jackson.core", "jackson-annotations")
-    exclude("com.fasterxml.jackson.core", "jackson-databind")
-    exclude("com.fasterxml.jackson.core", "jackson-core")
-    exclude("commons-configuration","commons-configuration")
-    exclude("com.amazonaws","aws-java-sdk-bundle")
-    exclude("com.amazonaws","aws-java-sdk")
-    exclude("org.apache.hadoop" ,"hadoop-common"),
-  "com.amazonaws" % "aws-java-sdk" % "1.7.4"
+  "com.amazonaws" % "aws-java-sdk-core" % "1.11.603"
     exclude("com.fasterxml.jackson.core", "jackson-annotations")
     exclude("com.fasterxml.jackson.core", "jackson-databind")
     exclude("com.fasterxml.jackson.core", "jackson-core")
     exclude("commons-configuration","commons-configuration"),
-//  "com.amazonaws" % "aws-java-sdk-s3" % "1.7.4",
+  "com.amazonaws" % "aws-java-sdk-s3" % "1.11.603",
   "com.github.universal-automata" % "liblevenshtein" % "3.0.0"
     exclude("com.google.guava", "guava")
     exclude("org.apache.commons", "commons-lang3"),
