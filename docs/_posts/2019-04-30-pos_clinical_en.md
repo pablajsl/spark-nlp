@@ -7,7 +7,7 @@ class: PerceptronModel
 language: en
 repository: clinical/models
 date: 2019-04-30
-tags: [clinical, licensed, pos,en]
+tags: [clinical, licensed, pos,en, ru]
 article_header:
    type: cover
 use_language_switcher: "Python-Scala-Java"
@@ -23,7 +23,7 @@ Sets a Part-Of-Speech tag to each word within a sentence.
 [Download](https://s3.amazonaws.com/auxdata.johnsnowlabs.com/clinical/models/pos_clinical_en_2.0.2_2.4_1556660550177.zip){:.button.button-orange.button-orange-trans.arr.button-icon}
 
 {:.h2_title}
-## How to use 
+## How to use
 <div class="tabs-box" markdown="1">
 
 {% include programmingLanguageSelectScalaPython.html %}
@@ -33,7 +33,7 @@ Sets a Part-Of-Speech tag to each word within a sentence.
 pos = PerceptronModel.pretrained("pos_clinical","en","clinical/models")\
 	.setInputCols(["token","sentence"])\
 	.setOutputCol("pos")
-    
+
 pos_pipeline = Pipeline(stages=[document_assembler, sentence_detector, tokenizer, pos])
 light_pipeline = LightPipeline(pos_pipeline.fit(spark.createDataFrame([[""]]).toDF("text")))
 result = light_pipeline.fullAnnotate("""He was given boluses of MS04 with some effect, he has since been placed on a PCA - he take 80mg of oxycontin at home, his PCA dose is ~ 2 the morphine dose of the oxycontin, he has also received ativan for anxiety.""")
@@ -43,7 +43,7 @@ result = light_pipeline.fullAnnotate("""He was given boluses of MS04 with some e
 val pos = PerceptronModel.pretrained("pos_clinical","en","clinical/models")
 	.setInputCols("token","sentence")
 	.setOutputCol("pos")
-    
+
 val pipeline = new Pipeline().setStages(Array(document_assembler, sentence_detector, tokenizer, pos))
 val result = pipeline.fit(Seq.empty["He was given boluses of MS04 with some effect, he has since been placed on a PCA - he take 80mg of oxycontin at home, his PCA dose is ~ 2 the morphine dose of the oxycontin, he has also received ativan for anxiety."].toDS.toDF("text")).transform(data)
 ```

@@ -4,7 +4,7 @@ title: Sentence Detection in Multi-lingual Texts
 author: John Snow Labs
 name: my_detector_dl
 date: 2021-01-03
-tags: [open_source, xx, ru, sentence_detection]
+tags: [open_source, xx, ru, en, sentence_detection]
 article_header:
   type: cover
 use_language_switcher: "Python-Scala-Java"
