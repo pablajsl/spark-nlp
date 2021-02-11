@@ -4,12 +4,12 @@ title: Detect Assertion Status (assertion_dl_en)
 author: John Snow Labs
 name: assertion_dl_en
 date: 2020-01-30
-tags: [clinical, licensed, ner, en]
+tags: [clinical, licensed, ner, en, ru]
 article_header:
   type: cover
 use_language_switcher: "Python-Scala-Java"
 ---
- 
+
 ## Description
 
 Deep learning named entity recognition model for assertions. The SparkNLP deep learning model (NerDL) is inspired by a former state of the art model for NER: Chiu & Nicols, Named Entity Recognition with Bidirectional LSTM-CNN.
@@ -47,7 +47,7 @@ ner_converter = NerConverter() \
 clinical_assertion = AssertionDLModel.pretrained("assertion_dl", "en", "clinical/models") \
     .setInputCols(["sentence", "ner_chunk", "embeddings"]) \
     .setOutputCol("assertion")
-    
+
 nlpPipeline = Pipeline(stages=[documentAssembler, sentenceDetector, tokenizer, word_embeddings, clinical_ner, ner_converter, clinical_assertion])
 model = nlpPipeline.fit(spark.createDataFrame([[""]]).toDF("text"))
 
@@ -61,7 +61,7 @@ val word_embeddings = WordEmbeddingsModel.pretrained("embeddings_clinical", "en"
   .setInputCols(Array("sentence", "token"))
   .setOutputCol("embeddings")
 val clinical_ner = NerDLModel.pretrained("ner_clinical", "en", "clinical/models")
-  .setInputCols(Array("sentence", "token", "embeddings")) 
+  .setInputCols(Array("sentence", "token", "embeddings"))
   .setOutputCol("ner")
 val ner_converter = NerConverter()
   .setInputCols(Array("sentence", "token", "ner"))
