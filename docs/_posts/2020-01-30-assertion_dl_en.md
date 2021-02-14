@@ -4,10 +4,10 @@ title: Detect Assertion Status (assertion_dl_en)
 author: John Snow Labs
 name: assertion_dl_en
 date: 2020-01-30
-tags: [clinical, licensed, ner, en, ru]
+tags: [clinical, licensed, ner, en, ru, xx]
 article_header:
   type: cover
-use_language_switcher: "Python-Scala-Java"
+use_language_switcher: 'Python-Scala-Java'
 ---
 
 ## Description
@@ -15,15 +15,18 @@ use_language_switcher: "Python-Scala-Java"
 Deep learning named entity recognition model for assertions. The SparkNLP deep learning model (NerDL) is inspired by a former state of the art model for NER: Chiu & Nicols, Named Entity Recognition with Bidirectional LSTM-CNN.
 
 {:.h2_title}
+
 ## Assertion Status
-``hypothetical``, ``present``, ``absent``, ``possible``, ``conditional``, ``associated_with_someone_else``.
+
+`hypothetical`, `present`, `absent`, `possible`, `conditional`, `associated_with_someone_else`.
 
 {:.btn-box}
 <button class="button button-orange" disabled>Live Demo</button>
-[Open in Colab](https://colab.research.google.com/github/JohnSnowLabs/spark-nlp-workshop/blob/master/tutorials/Certification_Trainings/Healthcare/2.Clinical_Assertion_Model.ipynb){:.button.button-orange.button-orange-trans.co.button-icon}{:target="_blank"}
+[Open in Colab](https://colab.research.google.com/github/JohnSnowLabs/spark-nlp-workshop/blob/master/tutorials/Certification_Trainings/Healthcare/2.Clinical_Assertion_Model.ipynb){:.button.button-orange.button-orange-trans.co.button-icon}{:target="\_blank"}
 [Download](https://s3.amazonaws.com/auxdata.johnsnowlabs.com/clinical/models/assertion_dl_en_2.4.0_2.4_1580237286004.zip){:.button.button-orange.button-orange-trans.arr.button-icon}
 
 {:.h2_title}
+
 ## How to use
 
 Use as part of an nlp pipeline with the following stages: DocumentAssembler, SentenceDetector, Tokenizer, WordEmbeddingsModel, NerDLModel, NerConverter, AssertionDLModel.
@@ -31,7 +34,6 @@ Use as part of an nlp pipeline with the following stages: DocumentAssembler, Sen
 <div class="tabs-box" markdown="1">
 
 {% include programmingLanguageSelectScalaPython.html %}
-
 
 ```python
 ...
@@ -78,8 +80,10 @@ val result = pipeline.fit(Seq.empty["Patient has a headache for the last 2 weeks
 </div>
 
 {:.h2_title}
+
 ## Results
-The output is a dataframe with a sentence per row and an ``"assertion"`` column containing all of the assertion labels in the sentence. The assertion column also contains assertion character indices, and other metadata. To get only the entity chunks and assertion labels, without the metadata, select ``"ner_chunk.result"`` and ``"assertion.result"`` from your output dataframe.
+
+The output is a dataframe with a sentence per row and an `"assertion"` column containing all of the assertion labels in the sentence. The assertion column also contains assertion character indices, and other metadata. To get only the entity chunks and assertion labels, without the metadata, select `"ner_chunk.result"` and `"assertion.result"` from your output dataframe.
 
 ```bash
 |   | chunks     | entities | assertion   |
@@ -91,6 +95,7 @@ The output is a dataframe with a sentence per row and an ``"assertion"`` column 
 ```
 
 {:.model-param}
+
 ## Model Information
 
 {:.table-model}
@@ -106,12 +111,16 @@ The output is a dataframe with a sentence per row and an ``"assertion"`` column 
 |Case sensitive:|false|
 
 {:.h2_title}
+
 ## Data Source
+
 Trained on 2010 i2b2/VA challenge on concepts, assertions, and relations in clinical text with 'embeddings_clinical'.
 https://portal.dbmi.hms.harvard.edu/projects/n2c2-nlp/
 
 {:.h2_title}
+
 ## Benchmarking
+
 ```bash
 |    | label                        | prec | rec  | f1   |
 |---:|-----------------------------:|-----:|-----:|-----:|
