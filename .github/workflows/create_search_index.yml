@@ -19,9 +19,6 @@ jobs:
           working-directory: docs
           bundler-cache: true
       - name: Index changed posts
-        env:
-          ELASTICSEARCH_URL: ${{ secrets.ELASTICSEARCH_URL }}
-          ELASTICSEARCH_ACCESS_TOKEN: ${{ secrets.ELASTICSEARCH_ACCESS_TOKEN }}
         working-directory: docs
         run: |
           git diff --name-only HEAD^ | grep ^docs/_posts > posts.txt
