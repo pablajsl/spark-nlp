@@ -21,5 +21,6 @@ jobs:
       - name: Index changed posts
         working-directory: docs
         run: |
-          git diff --name-only HEAD^ | grep ^docs/_posts > posts.txt
+          git diff --name-only HEAD^ > changes.txt
+          cat changes.txt
           bundle exec jekyll build
